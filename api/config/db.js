@@ -15,7 +15,7 @@ const connectDB = () => {
     })
 
     connection.on('connected', () => {
-        log('DB connectioned')
+        log('DB connection successful!')
     })
 
     connection.on('error', (err) => {
