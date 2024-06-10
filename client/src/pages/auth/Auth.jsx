@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { GoogleLogin } from 'react-google-login'
 import useStyles from './style';
 import { Avatar, Button, Container, Grid, Paper, Typography } from '@material-ui/core';
+import Icon from './Icon';
 import Input from './Input';
 
 const Auth = () => {
@@ -29,6 +31,15 @@ const Auth = () => {
 
   }
 
+  const googleSuccess = async (res) => {
+    console.log('clicked!!!')
+    // console.log(res);
+  }
+
+  const googleFailure = (error) => {
+    console.log(error);
+  }
+
   return (
     <Container component='main' maxWidth='xs' >
       <Paper className={classes.paper} elevation={3}>
@@ -53,8 +64,26 @@ const Auth = () => {
                 <Input name='confirmPassword' label='Confirm Password' handleChange={handleChange} type='password'/>
             }
           </Grid>
-
           <Button type='submit' variant='contained' color='primary' fullWidth className={classes.submit}>{isSignUp ? 'Sign Up': 'Sign In'}</Button>
+
+            <GoogleLogin
+              clientId=''
+              render={(renderProps)=> (
+                <Button 
+                className={classes.googleButton} 
+                color="primary" 
+                fullWidth 
+                onClick={renderProps.onClick} 
+                // disabled={renderProps.disabled} 
+                startIcon={<Icon/>} 
+                variant='contained'>
+                  Google Sign In
+                </Button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy='single-host_origin'
+            /> 
 
           <Grid container justifyContent='flex-end'>
             <Grid item>
