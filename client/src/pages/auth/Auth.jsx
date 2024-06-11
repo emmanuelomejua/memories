@@ -6,7 +6,9 @@ import { useDispatch } from 'react-redux';
 import { Avatar, Button, Container, Grid, Paper, Typography } from '@material-ui/core';
 import Icon from './Icon';
 import Input from './Input';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import { useHistory } from 'react-router-dom';
+
+const initialState = {firstName: '', lastNAme: '', email: '', password: '', confirmPassword: ''};
 
 const Auth = () => {
 
@@ -14,6 +16,8 @@ const Auth = () => {
 
   const [isSignUp, setIsSignup] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
+
+  const [userDetails, setUsertDetails] = useState(initialState);
 
   const dispatch = useDispatch();
   const history = useHistory()
@@ -30,10 +34,16 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // if(isSignUp){
+    //   dispatch(signup(userDetails, history))
+    // } else {
+    //   dispatch(signin(userDetails, history))
+    // }
   }
 
-  const handleChange = () => {
-
+  const handleChange = (e) => {
+    setUsertDetails({...userDetails, [e.target.name]: e.target.value})
   }
 
   const googleSuccess = async (res) => {
