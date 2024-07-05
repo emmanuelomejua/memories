@@ -8,7 +8,8 @@ import morgan from 'morgan'
 const { json, urlencoded } = express
 
 //routes import
-import postRoutes from './routes/postsRoute.js'
+import postRoutes from './routes/postsRoute.js';
+import authRoute from './routes/authRoute.js';
 
 //config
 dotenv.config()
