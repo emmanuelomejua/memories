@@ -1,9 +1,11 @@
 import express from 'express'
-import { getPosts, createPosts } from '../contollers/posts.js'
+import { getPosts, createPosts } from '../contollers/posts.js';
+
+import auth from '../middleware/auth.js';
 
 const router = express.Router()
 
-router.get('/',  getPosts )
-router.post('/',  createPosts )
+router.get('/', auth, getPosts )
+router.post('/', auth, createPosts )
 
 export default router

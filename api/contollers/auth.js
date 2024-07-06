@@ -7,13 +7,17 @@ export const signin = async (req, res) => {
     const {email, password} = req.body;
 
     try {
-        const userExists = await User.findOne({email});
+        const user = await User.findOne({email});
 
-        if(!userExists) return res.status(404).json('User not found or does not exist');
+        if(!user) return res.status(404).json('User not found or does not exist');
 
-        const validPassword = await bcrypt.compare(password, userExists?.password);
+        const validPassword = await bcrypt.compare(password, user.password);
 
         if(!validPassword) return res.status(401).json({message: 'Please enter a valid username and password'});
+
+        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '1d'});
+
+        res.status(200).json({ data: user, token })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -21,8 +25,23 @@ export const signin = async (req, res) => {
 
 
 export const signup = async (req, res) => {
+    const { email, password, firstName, lastName} = req.body;
     try {
-        
+        const userExist = await User.findOne({email});
+
+        if(userExist) return res.status(400).json('User already exist');
+
+        const hashedPassword = bcrypt.hash(password, 12);
+
+        const result = await User.create({
+            email,
+            password: hashedPassword,
+            name: `${firstName}, ${lastName}`
+        })
+
+        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '1d'});
+
+        res.status(200).json({data: result, token});
     } catch (error) {
         res.status(500).json(error);
     }

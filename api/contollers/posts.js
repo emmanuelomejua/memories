@@ -1,4 +1,5 @@
-import postMessage from "../models/postMessage.js"
+import postMessage from "../models/postMessage.js";
+
 
 export const getPosts = async (req, res) => {
     try{
@@ -18,5 +19,31 @@ export const createPosts = async (req, res) => {
         res.status(201).json(newPost)
     } catch(error){
         res.status(409).json({message: error.message})
+    }
+}
+
+
+export const getPost = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+export const likePost = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+
+export const updatePost = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).json(error);
     }
 }
