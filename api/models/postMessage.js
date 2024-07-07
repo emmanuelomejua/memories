@@ -20,6 +20,6 @@ const postSchema = mongoose.Schema({
     }
 }, {timestamps: true})
 
-const postMessage = mongoose.model('postmessage', postSchema)
+const postMessage = mongoose.model('Posts', postSchema)
 
 export default postMessage;
