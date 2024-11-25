@@ -7,6 +7,7 @@ import { Avatar, Button, Container, Grid, Paper, Typography } from '@material-ui
 import Icon from './Icon';
 import Input from './Input';
 import { useHistory } from 'react-router-dom';
+import { signin, signup } from '../../actions/auth';
 
 const initialState = {firstName: '', lastNAme: '', email: '', password: '', confirmPassword: ''};
 
@@ -35,11 +36,11 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // if(isSignUp){
-    //   dispatch(signup(userDetails, history))
-    // } else {
-    //   dispatch(signin(userDetails, history))
-    // }
+    if(isSignUp){
+      dispatch(signup(userDetails, history))
+    } else {
+      dispatch(signin(userDetails, history))
+    }
   }
 
   const handleChange = (e) => {

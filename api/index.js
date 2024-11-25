@@ -28,7 +28,8 @@ app.use(cors())
 
 
 //route use
-app.use('/posts', postRoutes)
+app.use('/posts', postRoutes);
+app.use('/auth', authRoute)
 
 
 const port = process.env.PORT
