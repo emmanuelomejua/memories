@@ -22,7 +22,7 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        const profile = JSON.parse(localStorage.getItem('profile'));
+        const profile = JSON.parse(localStorage.getItem('profile'))
         if (profile) {
             setUser(profile);
         }
@@ -39,10 +39,13 @@ const Navbar = () => {
         <Toolbar className={classes.toolbar}>
             {user ? 
                 <div className={classes.profile}>
-                    <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>
-                        {user.result.name.charAt(0)}
+                    <Avatar className={classes.purple} 
+                       alt={user && user.result ? user.result.name : ''}
+                       src={user && user.result ? user.result.imageUrl : ''}
+                    >
+                    {user && user.data && user.data.name ? user.data.name.charAt(0) : ''}
                     </Avatar>
-                    <Typography className={classes.userName} variant='h6'>{user.result.name}</Typography>
+                    <Typography className={classes.userName} variant='h6'>{user && user.data && user.data.name}</Typography>
                     <Button variant='contained' color='secondary' onClick={logout}>Logout</Button>
                 </div>
             : (

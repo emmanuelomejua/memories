@@ -15,8 +15,8 @@ export const getPosts = async (req, res) => {
 
 export const createPosts = async (req, res) => {
     const post = req.body
-    const newPost = new postMessage(post)
     try{
+        const newPost = new postMessage({...post, creator: req.userId, createdAt: new Date().toISOString()})
         await newPost.save()
         res.status(201).json(newPost)
     } catch(error){
@@ -27,7 +27,9 @@ export const createPosts = async (req, res) => {
 
 export const getPost = async (req, res) => {
     try {
-        
+        const posts = await postMessage.find();
+
+        res.status(200).json(posts);
     } catch (error) {
         res.status(500).json(error);
     }

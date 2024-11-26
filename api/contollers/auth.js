@@ -15,7 +15,7 @@ export const signin = async (req, res) => {
 
         if(!validPassword) return res.status(401).json({message: 'Please enter a valid username and password'});
 
-        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '1d'});
+        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '30d'});
 
         res.status(200).json({ data: user, token })
     } catch (error) {
@@ -31,7 +31,7 @@ export const signup = async (req, res) => {
 
         if(userExist) return res.status(400).json('User already exist');
 
-        const hashedPassword = bcrypt.hash(password, 12);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const result = await User.create({
             email,
@@ -39,11 +39,11 @@ export const signup = async (req, res) => {
             name: `${firstName}, ${lastName}`
         })
 
-        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '1d'});
+        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '30d'});
 
         res.status(200).json({data: result, token});
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 }
 
