@@ -23,7 +23,7 @@ export const updatePost = (id, updatedPost) => SERVER.patch(`posts${id}`, update
 export const deletePost = (id) => SERVER.delete(`posts/${id}`);
 
 
-export const siginIn = (userDetails) => SERVER.post('auth/login', userDetails);
-export const siginUp = (userDetails) => SERVER.post('auth/signup', userDetails)
+export const signIn = (userDetails) => SERVER.post('auth/login', userDetails);
+export const signUp = (userDetails) => SERVER.post('auth/signup', userDetails)
 
 export default SERVER;

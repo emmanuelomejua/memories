@@ -6,7 +6,7 @@ import * as SERVER from '../api/index';
 export const signin = (userDetails, history) => async (dispatch) => {
     try {
 
-        const { data } = await SERVER.siginIn(userDetails);
+        const { data } = await SERVER.signIn(userDetails);
 
         dispatch({ type: AUTH, data })
         
@@ -19,7 +19,7 @@ export const signin = (userDetails, history) => async (dispatch) => {
 export const signup = (userDetails, history) => async (dispatch) => {
     try {
 
-        const {  data } = await SERVER.signup(userDetails);
+        const {  data } = await SERVER.signUp(userDetails);
 
         dispatch({ type: AUTH, data })
         
