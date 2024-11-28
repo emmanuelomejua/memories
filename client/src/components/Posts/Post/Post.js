@@ -30,6 +30,7 @@ const Post = ({ post, setCurrentId }) => {
     return <React.Fragment><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</React.Fragment>;
   };
 
+
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
@@ -37,10 +38,10 @@ const Post = ({ post, setCurrentId }) => {
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
-      {(user && user._id === (post.creator) &&
+      {(Number(user._id) === Number(post.creator) ?
       <div className={classes.overlay2}>
         <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
-      </div>
+      </div>: ''
        )}
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
