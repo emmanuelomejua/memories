@@ -15,7 +15,7 @@ export const signin = async (req, res) => {
 
         if(!validPassword) return res.status(401).json({message: 'Please enter a valid username and password'});
 
-        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '30d'});
+        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '1d'});
 
         res.status(200).json({ data: user, token })
     } catch (error) {
