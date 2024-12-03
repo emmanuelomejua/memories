@@ -1,10 +1,10 @@
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import useStyles from './style';
 import memories from '../../images/memories.png';
-import { Link, useHistory, useLocation  } from 'react-router-dom';
-import React, { useEffect, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import deCode from 'jwt-decode'
+
 
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
 
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
-    const location = useLocation()
+
     const history = useHistory()
 
     const logout = () => {
@@ -21,22 +21,6 @@ const Navbar = () => {
         history.push('/auth')
         setUser(null)
     }
-
-    useEffect(() => {
-
-        const token = JSON.parse(localStorage.getItem('profile'));
-
-        if (token) {
-
-            const decodedToken = deCode(token);
-
-            if(decodedToken.exp * 1000 < new Date().getTime()){
-                logout();
-            }
-
-            setUser(token);
-        }
-    },[location])
 
 
   return (

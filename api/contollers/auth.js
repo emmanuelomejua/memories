@@ -15,7 +15,7 @@ export const signin = async (req, res) => {
 
         if(!validPassword) return res.status(401).json({message: 'Please enter a valid username and password'});
 
-        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '1d'});
+        const token = jwt.sign({ email: user.email, id: user._id }, 'test', {expiresIn: '3d'});
 
         res.status(200).json({ data: user, token })
     } catch (error) {
@@ -39,7 +39,7 @@ export const signup = async (req, res) => {
             name: `${firstName}, ${lastName}`
         })
 
-        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '30d'});
+        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: '3d'});
 
         res.status(200).json({data: result, token});
     } catch (error) {
